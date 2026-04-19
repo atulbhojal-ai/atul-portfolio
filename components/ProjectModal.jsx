@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProjectModal({ project, onClose }) {
   const [activeTab, setActiveTab] = useState("Overview");
+
+  // Reset tab to Overview every time a new project is opened
+  useEffect(() => {
+    if (project) {
+      setActiveTab("Overview");
+    }
+  }, [project]);
 
   if (!project) return null;
 
@@ -24,7 +31,7 @@ export default function ProjectModal({ project, onClose }) {
         }}
       >
         <motion.div
-          className="bg-[var(--bg-secondary)] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] overflow-y-auto rounded-t-3xl md:rounded-3xl border border-[var(--border-subtle)] relative flex flex-col"
+          className="bg-[var(--bg-secondary)] w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] rounded-t-3xl md:rounded-3xl border border-[var(--border-subtle)] relative flex flex-col"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 60 }}
@@ -39,8 +46,8 @@ export default function ProjectModal({ project, onClose }) {
             ✕
           </button>
 
-          {/* Header */}
-          <div className="p-8 md:p-10 pb-6 border-b border-[var(--border-subtle)]">
+          {/* Header — fixed, never scrolls */}
+          <div className="flex-shrink-0 p-8 md:p-10 pb-6 border-b border-[var(--border-subtle)]">
             <h2 className="font-syne font-extrabold text-3xl md:text-[32px] text-[var(--text-primary)] mb-3 pr-8">
               {project.name}
             </h2>
@@ -56,15 +63,15 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Tabs */}
-          <div className="flex px-8 md:px-10 border-b border-[var(--border-subtle)] pt-2 overflow-x-auto">
+          {/* Tabs — fixed, never scrolls */}
+          <div className="flex-shrink-0 flex px-8 md:px-10 border-b border-[var(--border-subtle)] pt-2 overflow-x-auto">
             {tabs.map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`py-4 px-2 mr-8 text-[14px] font-medium whitespace-nowrap border-b-2 transition-colors duration-300 ${
-                  activeTab === tab 
-                  ? "border-[var(--accent-gold)] text-[var(--accent-gold)]" 
+                  activeTab === tab
+                  ? "border-[var(--accent-gold)] text-[var(--accent-gold)]"
                   : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                 }`}
               >
@@ -73,8 +80,8 @@ export default function ProjectModal({ project, onClose }) {
             ))}
           </div>
 
-          {/* Content Area */}
-          <div className="p-8 md:p-10 flex-grow bg-[var(--bg-primary)]/50">
+          {/* Content Area — ONLY this part scrolls */}
+          <div className="flex-1 overflow-y-auto p-8 md:p-10 bg-[var(--bg-primary)]/50">
             {activeTab === "Overview" && (
               <div className="space-y-8 animate-in fade-in duration-500">
                 <div className="bg-[var(--bg-tertiary)] p-6 rounded-xl border border-[var(--border-subtle)]" style={{ borderLeftWidth: "3px", borderLeftColor: "var(--accent-gold)" }}>
