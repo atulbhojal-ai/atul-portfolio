@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0c0c0f;
+  --color-bg-secondary: #131318;
+  --color-bg-tertiary: #1a1a22;
+  --color-accent-gold: #f59e0b;
+  --color-accent-violet: #7c3aed;
+  --color-accent-gold-dim: #92400e;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #475569;
+  --color-border-subtle: #1e1e28;
+  --color-border-accent: #2a2035;
+}
+
+:root {
+  --bg-primary: #0C0C0F;
+  --bg-secondary: #131318;
+  --bg-tertiary: #1A1A22;
+  --accent-gold: #F59E0B;
+  --accent-violet: #7C3AED;
+  --accent-gold-dim: #92400E;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #475569;
+  --border-subtle: #1E1E28;
+  --border-accent: #2A2035;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+}
+
+code, pre, .mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@keyframes crawl {
+  0% { transform: perspective(1000px) rotateX(25deg) translateY(0); }
+  100% { transform: perspective(1000px) rotateX(25deg) translateY(calc(-100% - 320px)); }
+}
+
+.animate-crawl {
+  animation: crawl 45s linear infinite;
+  will-change: transform;
+}
+
+.cinematic-fade:hover .animate-crawl {
+  animation-play-state: paused;
+}
+
+.cinematic-fade {
+  position: relative;
+  overflow: hidden;
+}
+
+.cinematic-fade::before,
+.cinematic-fade::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cinematic-fade::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg-tertiary) 10%, rgba(245, 158, 11, 0.05) 50%, transparent 100%);
+}
+
+.cinematic-fade::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg-tertiary) 10%, rgba(245, 158, 11, 0.05) 50%, transparent 100%);
+}
