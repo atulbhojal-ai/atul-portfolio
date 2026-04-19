@@ -87,7 +87,7 @@ export default function Hero() {
               Explore My Work
             </a>
             <a
-              href="/resume.pdf"
+              href="/abcvaiautomation.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 rounded-lg border border-[var(--accent-gold)] text-[var(--accent-gold)] font-semibold hover:bg-[var(--accent-gold)] hover:text-black transition-all text-center"
