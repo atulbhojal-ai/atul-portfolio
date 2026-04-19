@@ -1,7 +1,5 @@
 {
-  "functions": {
-    "api/contact.py": {
-      "runtime": "vercel-python@4.3.0"
-    }
-  }
+  "rewrites": [
+    { "source": "/api/contact", "destination": "/api/contact.py" }
+  ]
 }
